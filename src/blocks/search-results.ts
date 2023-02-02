@@ -38,7 +38,7 @@ function createTemperatureDiv(
 ) {
   const temperatureDiv = document.createElement("div");
   temperatureDiv.classList.add("weather-temperature");
-  temperatureDiv.textContent = `${temperatureMetric}°C`;
+  temperatureDiv.textContent = `${temperatureMetric} °C`;
 
   return temperatureDiv;
 }
@@ -49,7 +49,7 @@ function createFeelsLikeDiv(
 ) {
   const feelsLikeDiv = document.createElement("div");
   feelsLikeDiv.classList.add("weather-feels-like");
-  feelsLikeDiv.textContent = `Feels like: ${feelsLikeMetric}°C`;
+  feelsLikeDiv.textContent = `Feels like: ${feelsLikeMetric} °C`;
 
   return feelsLikeDiv;
 }
@@ -57,7 +57,7 @@ function createFeelsLikeDiv(
 function createHumidityDiv(humidityMetric: number, humidityImperial: number) {
   const humidityDiv = document.createElement("div");
   humidityDiv.classList.add("weather-humidity");
-  humidityDiv.textContent = `Humidity: ${humidityMetric}%`;
+  humidityDiv.textContent = `Humidity: ${humidityMetric} %`;
 
   return humidityDiv;
 }
@@ -68,13 +68,20 @@ function createWindSpeedDiv(
 ) {
   const windSpeedDiv = document.createElement("div");
   windSpeedDiv.classList.add("weather-wind-speed");
-  windSpeedDiv.textContent = `Wind Speed: ${windSpeedMetric}km/h`;
+  windSpeedDiv.textContent = `Wind Speed: ${windSpeedMetric} km/h`;
 
   return windSpeedDiv;
 }
 
+function createResultsContainer() {
+  const resultsContainer = document.createElement("div");
+  resultsContainer.classList.add("search-results-container");
+
+  return resultsContainer;
+}
+
 // Create the results container and append the results to it
-function createResultsContainer(
+function addResultsToContainer(
   location: string,
   country: string,
   description: string,
@@ -88,8 +95,7 @@ function createResultsContainer(
   windSpeedMetric: number,
   windSpeedImperial: number
 ) {
-  const resultsContainer = document.createElement("div");
-  resultsContainer.classList.add("search-results-container");
+  const resultsContainer = document.querySelector(".search-results-container");
 
   const locationResult = createLocationDiv(location);
   const countryResult = createCountryDiv(country);
@@ -119,8 +125,6 @@ function createResultsContainer(
     humidityResult,
     windSpeedResult
   );
-
-  return resultsContainer;
 }
 
 // Get the results from the API and send them to the DOM
@@ -152,7 +156,7 @@ async function sendResultsToDom(searchInput: string) {
   const humidityImperial = Math.round(objResponseImperial.humidity);
   const windSpeedImperial = Math.round(objResponseImperial.windSpeed);
 
-  createResultsContainer(
+  addResultsToContainer(
     location,
     country,
     description,
