@@ -43,15 +43,11 @@ async function getTemperatureImperial(location: string) {
 }
 
 // Call both functions and return the data in the requested unit
-async function getTemperature(location: string, unit: string = "metric") {
+async function getTemperature(location: string) {
   const metricTemperature = await getTemperatureMetric(location);
   const imperialTemperature = await getTemperatureImperial(location);
 
-  if (unit === "imperial") {
-    return imperialTemperature;
-  }
-
-  return metricTemperature;
+  return { metricTemperature, imperialTemperature };
 }
 
 export default getTemperature;

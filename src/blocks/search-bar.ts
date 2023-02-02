@@ -1,4 +1,4 @@
-import getTemperature from "../functions/api-search";
+import { sendResultsToDom } from "./search-results";
 
 function createSearchInput() {
   const searchBarInput = document.createElement("input");
@@ -27,30 +27,12 @@ function createSearchBar() {
 
   searchInput.addEventListener("keyup", (event) => {
     if (event.key === "Enter") {
-      const response = getTemperature(searchInput.value).catch(() => {
-        // TODO: Add custom alert
-        // eslint-disable-next-line no-alert
-        alert(
-          "Location not found. Please try again with a different location or check your spelling and try again."
-        );
-      });
-      // TODO: Show response on DOM
-      // eslint-disable-next-line no-console
-      console.log(response);
+      sendResultsToDom(searchInput.value);
     }
   });
 
   searchButton.addEventListener("click", () => {
-    const response = getTemperature(searchInput.value).catch(() => {
-      // TODO: Add custom alert
-      // eslint-disable-next-line no-alert
-      alert(
-        "Location not found. Please try again with a different location or check your spelling and try again."
-      );
-    });
-    // TODO: Show response on DOM
-    // eslint-disable-next-line no-console
-    console.log(response);
+    sendResultsToDom(searchInput.value);
   });
 
   searchBarContainer.appendChild(searchInput);
