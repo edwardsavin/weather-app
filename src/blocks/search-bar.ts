@@ -27,13 +27,29 @@ function createSearchBar() {
 
   searchInput.addEventListener("keyup", (event) => {
     if (event.key === "Enter") {
-      const response = getTemperature(searchInput.value);
+      const response = getTemperature(searchInput.value).catch(() => {
+        // TODO: Add custom alert
+        // eslint-disable-next-line no-alert
+        alert(
+          "Location not found. Please try again with a different location or check your spelling and try again."
+        );
+      });
+      // TODO: Show response on DOM
+      // eslint-disable-next-line no-console
       console.log(response);
     }
   });
 
   searchButton.addEventListener("click", () => {
-    const response = getTemperature(searchInput.value);
+    const response = getTemperature(searchInput.value).catch(() => {
+      // TODO: Add custom alert
+      // eslint-disable-next-line no-alert
+      alert(
+        "Location not found. Please try again with a different location or check your spelling and try again."
+      );
+    });
+    // TODO: Show response on DOM
+    // eslint-disable-next-line no-console
     console.log(response);
   });
 
