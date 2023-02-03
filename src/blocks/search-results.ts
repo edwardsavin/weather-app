@@ -1,4 +1,5 @@
 import getTemperature from "../functions/api-search";
+import { switchUnits } from "./unit-switch";
 
 let lastValidLocation: string = "London";
 
@@ -34,10 +35,7 @@ function createIconDiv(icon: string) {
   return iconDiv;
 }
 
-function createTemperatureDiv(
-  temperatureMetric: number,
-  temperatureImperial: number
-) {
+function createTemperatureDiv(temperatureMetric: number) {
   const temperatureDiv = document.createElement("div");
   temperatureDiv.classList.add("weather-temperature");
   temperatureDiv.textContent = `${temperatureMetric} °C`;
@@ -45,10 +43,7 @@ function createTemperatureDiv(
   return temperatureDiv;
 }
 
-function createFeelsLikeDiv(
-  feelsLikeMetric: number,
-  feelsLikeImperial: number
-) {
+function createFeelsLikeDiv(feelsLikeMetric: number) {
   const feelsLikeDiv = document.createElement("div");
   feelsLikeDiv.classList.add("weather-feels-like");
   feelsLikeDiv.textContent = `Feels like: ${feelsLikeMetric} °C`;
@@ -56,18 +51,15 @@ function createFeelsLikeDiv(
   return feelsLikeDiv;
 }
 
-function createHumidityDiv(humidityMetric: number, humidityImperial: number) {
+function createHumidityDiv(humidity: number) {
   const humidityDiv = document.createElement("div");
   humidityDiv.classList.add("weather-humidity");
-  humidityDiv.textContent = `Humidity: ${humidityMetric} %`;
+  humidityDiv.textContent = `Humidity: ${humidity} %`;
 
   return humidityDiv;
 }
 
-function createWindSpeedDiv(
-  windSpeedMetric: number,
-  windSpeedImperial: number
-) {
+function createWindSpeedDiv(windSpeedMetric: number) {
   const windSpeedDiv = document.createElement("div");
   windSpeedDiv.classList.add("weather-wind-speed");
   windSpeedDiv.textContent = `Wind Speed: ${windSpeedMetric} km/h`;
@@ -89,13 +81,9 @@ function addResultsToContainer(
   description: string,
   icon: string,
   temperatureMetric: number,
-  temperatureImperial: number,
   feelsLikeMetric: number,
-  feelsLikeImperial: number,
-  humidityMetric: number,
-  humidityImperial: number,
-  windSpeedMetric: number,
-  windSpeedImperial: number
+  humidity: number,
+  windSpeedMetric: number
 ) {
   const resultsContainer = document.querySelector(".search-results-container");
 
@@ -103,19 +91,10 @@ function addResultsToContainer(
   const countryResult = createCountryDiv(country);
   const descriptionResult = createDescriptionDiv(description);
   const iconResult = createIconDiv(icon);
-  const temperatureResult = createTemperatureDiv(
-    temperatureMetric,
-    temperatureImperial
-  );
-  const feelsLikeResult = createFeelsLikeDiv(
-    feelsLikeMetric,
-    feelsLikeImperial
-  );
-  const humidityResult = createHumidityDiv(humidityMetric, humidityImperial);
-  const windSpeedResult = createWindSpeedDiv(
-    windSpeedMetric,
-    windSpeedImperial
-  );
+  const temperatureResult = createTemperatureDiv(temperatureMetric);
+  const feelsLikeResult = createFeelsLikeDiv(feelsLikeMetric);
+  const humidityResult = createHumidityDiv(humidity);
+  const windSpeedResult = createWindSpeedDiv(windSpeedMetric);
 
   resultsContainer.append(
     locationResult,
@@ -165,12 +144,11 @@ async function sendResultsToDom(searchInput: string) {
 
   const temperatureMetric = Math.round(objResponseMetric.temperature);
   const feelsLikeMetric = Math.round(objResponseMetric.feelsLike);
-  const humidityMetric = Math.round(objResponseMetric.humidity);
+  const humidity = Math.round(objResponseMetric.humidity);
   const windSpeedMetric = Math.round(objResponseMetric.windSpeed);
 
   const temperatureImperial = Math.round(objResponseImperial.temperature);
   const feelsLikeImperial = Math.round(objResponseImperial.feelsLike);
-  const humidityImperial = Math.round(objResponseImperial.humidity);
   const windSpeedImperial = Math.round(objResponseImperial.windSpeed);
 
   addResultsToContainer(
@@ -179,11 +157,18 @@ async function sendResultsToDom(searchInput: string) {
     description,
     icon,
     temperatureMetric,
+    feelsLikeMetric,
+    humidity,
+    windSpeedMetric
+  );
+
+  // Send the results to the different unit values to the unit switch function
+  switchUnits(
+    temperatureMetric,
     temperatureImperial,
     feelsLikeMetric,
     feelsLikeImperial,
-    humidityMetric,
-    humidityImperial,
+    humidity,
     windSpeedMetric,
     windSpeedImperial
   );
