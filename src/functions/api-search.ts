@@ -44,10 +44,20 @@ async function getTemperatureImperial(location: string) {
 
 // Call both functions and return the data in the requested unit
 async function getTemperature(location: string) {
-  const metricTemperature = await getTemperatureMetric(location);
-  const imperialTemperature = await getTemperatureImperial(location);
+  try {
+    const metricTemperature = await getTemperatureMetric(location);
+    const imperialTemperature = await getTemperatureImperial(location);
 
-  return { metricTemperature, imperialTemperature };
+    return { metricTemperature, imperialTemperature };
+  } catch (error) {
+    // TODO: Add custom alert
+    // eslint-disable-next-line no-alert
+    alert(
+      "Location not found. Please try again with a different location or check your spelling and try again."
+    );
+
+    throw new Error(error);
+  }
 }
 
 export default getTemperature;

@@ -1,5 +1,7 @@
 import getTemperature from "../functions/api-search";
 
+let lastValidLocation: string = "London";
+
 function createLocationDiv(location: string) {
   const locationDiv = document.createElement("div");
   locationDiv.classList.add("weather-location");
@@ -127,17 +129,32 @@ function addResultsToContainer(
   );
 }
 
+function clearResults() {
+  const resultsContainer = document.querySelector(".search-results-container");
+  resultsContainer.innerHTML = "";
+}
+
+function setLastValidLocation(searchInput: string) {
+  lastValidLocation = searchInput;
+}
+
 // Get the results from the API and send them to the DOM
 async function sendResultsToDom(searchInput: string) {
-  const response = await getTemperature(searchInput).catch(() => {
-    // TODO: Add custom alert
-    // eslint-disable-next-line no-alert
-    alert(
-      "Location not found. Please try again with a different location or check your spelling and try again."
-    );
-  });
-  const objResponse = Object(response);
+  let response: object;
 
+  // Try to get the weather for the user's search input
+  try {
+    const newResponse = await getTemperature(searchInput);
+    response = newResponse;
+    setLastValidLocation(searchInput);
+  } catch (error) {
+    // If the user's search fails, get a fallback weather for the last valid location
+    const fallbackResponse = await getTemperature(lastValidLocation);
+    response = fallbackResponse;
+    setLastValidLocation(lastValidLocation);
+  }
+
+  const objResponse = Object(response);
   const objResponseMetric = Object(objResponse.metricTemperature);
   const objResponseImperial = Object(objResponse.imperialTemperature);
 
@@ -172,4 +189,4 @@ async function sendResultsToDom(searchInput: string) {
   );
 }
 
-export { createResultsContainer, sendResultsToDom };
+export { createResultsContainer, sendResultsToDom, clearResults };

@@ -1,4 +1,4 @@
-import { sendResultsToDom } from "./search-results";
+import { sendResultsToDom, clearResults } from "./search-results";
 
 function createSearchInput() {
   const searchBarInput = document.createElement("input");
@@ -27,11 +27,13 @@ function createSearchBar() {
 
   searchInput.addEventListener("keyup", (event) => {
     if (event.key === "Enter") {
+      clearResults();
       sendResultsToDom(searchInput.value);
     }
   });
 
   searchButton.addEventListener("click", () => {
+    clearResults();
     sendResultsToDom(searchInput.value);
   });
 
