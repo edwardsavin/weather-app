@@ -1,6 +1,7 @@
 import getTemperature from "../functions/api-search";
 import { switchUnits } from "./unit-switch";
 import getFlagEmoji from "../functions/get-flag-emoji";
+import getIcon from "../functions/get-icon";
 
 let lastValidLocation: string = "London";
 
@@ -31,11 +32,16 @@ function createDescriptionDiv(description: string) {
 }
 
 function createIconDiv(icon: string) {
-  const iconDiv = document.createElement("div");
-  iconDiv.classList.add("weather-icon");
-  iconDiv.textContent = icon;
+  const iconContainer = document.createElement("div");
+  iconContainer.classList.add("weather-icon-container");
 
-  return iconDiv;
+  const iconImg = document.createElement("img");
+  iconImg.classList.add("weather-icon");
+  iconImg.src = getIcon(icon);
+
+  iconContainer.append(iconImg);
+
+  return iconContainer;
 }
 
 function createTemperatureDiv(temperatureMetric: number) {
