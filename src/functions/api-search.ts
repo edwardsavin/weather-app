@@ -1,3 +1,5 @@
+import showSearchError from "./show-search-error";
+
 // Fetch weather data from OpenWeatherMap API and return information about it in metric units
 async function getTemperatureMetric(location: string) {
   const responseMetric = await fetch(
@@ -50,12 +52,8 @@ async function getTemperature(location: string) {
 
     return { metricTemperature, imperialTemperature };
   } catch (error) {
-    // TODO: Add custom alert
-    // eslint-disable-next-line no-alert
-    alert(
-      "Location not found. Please try again with a different location or check your spelling and try again."
-    );
-
+    // If the user's search fails, show an error message
+    showSearchError();
     throw new Error(error);
   }
 }
