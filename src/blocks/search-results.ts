@@ -1,5 +1,6 @@
 import getTemperature from "../functions/api-search";
 import { switchUnits } from "./unit-switch";
+import getFlagEmoji from "../functions/get-flag-emoji";
 
 let lastValidLocation: string = "London";
 
@@ -14,7 +15,9 @@ function createLocationDiv(location: string) {
 function createCountryDiv(country: string) {
   const countryDiv = document.createElement("div");
   countryDiv.classList.add("weather-country");
-  countryDiv.textContent = country;
+
+  const flag = getFlagEmoji(country);
+  countryDiv.textContent = flag;
 
   return countryDiv;
 }
@@ -97,8 +100,8 @@ function addResultsToContainer(
   const windSpeedResult = createWindSpeedDiv(windSpeedMetric);
 
   resultsContainer.append(
-    locationResult,
     countryResult,
+    locationResult,
     descriptionResult,
     iconResult,
     temperatureResult,
