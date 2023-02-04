@@ -1,4 +1,4 @@
-import showSearchError from "./show-search-error";
+import { showSearchError } from "./show-search-error";
 
 // Fetch weather data from OpenWeatherMap API and return information about it in metric units
 async function getTemperatureMetric(location: string) {

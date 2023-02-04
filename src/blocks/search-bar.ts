@@ -1,3 +1,4 @@
+import { clearSearchError } from "../functions/show-search-error";
 import { sendResultsToDom, clearResults } from "./search-results";
 
 function createSearchInput() {
@@ -27,6 +28,7 @@ function createSearchBar() {
 
   searchInput.addEventListener("keyup", (event) => {
     if (event.key === "Enter") {
+      clearSearchError();
       clearResults();
       sendResultsToDom(searchInput.value);
     }
