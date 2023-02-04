@@ -1,4 +1,13 @@
+function clearSearchError() {
+  const errorDiv = document.querySelector(".search-error");
+  if (errorDiv) {
+    errorDiv.remove();
+  }
+}
+
 function showSearchError() {
+  clearSearchError();
+  
   const searchBarContainer = document.querySelector(".search-bar-container");
   const errorDiv = document.createElement("div");
   errorDiv.classList.add("search-error");
