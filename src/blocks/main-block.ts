@@ -5,13 +5,22 @@ import { createUnitSwitcher } from "./unit-switch";
 function populateMainBlock() {
   const mainBlock = document.getElementById("main");
 
+  const mainContainer = document.createElement("div");
+  mainContainer.classList.add("main-container");
+
+  const contentWrapper = document.createElement("div");
+  contentWrapper.classList.add("content-wrapper");
+
   const searchBar = createSearchBar();
   const resultsContainer = createResultsContainer();
   const unitSwitcher = createUnitSwitcher();
 
-  mainBlock.appendChild(searchBar);
-  mainBlock.appendChild(unitSwitcher);
-  mainBlock.appendChild(resultsContainer);
+  contentWrapper.appendChild(searchBar);
+  contentWrapper.appendChild(resultsContainer);
+  contentWrapper.appendChild(unitSwitcher);
+
+  mainContainer.appendChild(contentWrapper);
+  mainBlock.appendChild(mainContainer);
 
   return mainBlock;
 }
