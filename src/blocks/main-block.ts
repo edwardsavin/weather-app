@@ -16,8 +16,8 @@ function populateMainBlock() {
   const unitSwitcher = createUnitSwitcher();
 
   contentWrapper.appendChild(searchBar);
-  contentWrapper.appendChild(resultsContainer);
   contentWrapper.appendChild(unitSwitcher);
+  contentWrapper.appendChild(resultsContainer);
 
   mainContainer.appendChild(contentWrapper);
   mainBlock.appendChild(mainContainer);

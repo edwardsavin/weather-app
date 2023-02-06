@@ -98,23 +98,35 @@ function addResultsToContainer(
 
   const locationResult = createLocationDiv(location);
   const countryResult = createCountryDiv(country);
+
   const descriptionResult = createDescriptionDiv(description);
   const iconResult = createIconDiv(icon);
+  const descriptionAndIconContainer = document.createElement("div");
+  descriptionAndIconContainer.classList.add("description-and-icon-container");
+  descriptionAndIconContainer.append(iconResult, descriptionResult);
+
   const temperatureResult = createTemperatureDiv(temperatureMetric);
   const feelsLikeResult = createFeelsLikeDiv(feelsLikeMetric);
   const humidityResult = createHumidityDiv(humidity);
   const windSpeedResult = createWindSpeedDiv(windSpeedMetric);
 
-  resultsContainer.append(
-    countryResult,
-    locationResult,
-    descriptionResult,
-    iconResult,
-    temperatureResult,
-    feelsLikeResult,
-    humidityResult,
-    windSpeedResult
-  );
+  const firstWrapper = document.createElement("div");
+  firstWrapper.classList.add("first-wrapper");
+  firstWrapper.append(countryResult, locationResult);
+
+  const secondWrapper = document.createElement("div");
+  secondWrapper.classList.add("second-wrapper");
+  secondWrapper.append(temperatureResult, descriptionAndIconContainer);
+
+  const mainWrapper = document.createElement("div");
+  mainWrapper.classList.add("main-wrapper");
+  mainWrapper.append(firstWrapper, secondWrapper);
+
+  const thirdWrapper = document.createElement("div");
+  thirdWrapper.classList.add("third-wrapper");
+  thirdWrapper.append(feelsLikeResult, humidityResult, windSpeedResult);
+
+  resultsContainer.append(mainWrapper, thirdWrapper);
 }
 
 function clearResults() {
