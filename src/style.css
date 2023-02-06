@@ -10,8 +10,8 @@
   --clr-800: hsl(201, 90%, 27%);
   --clr-900: hsl(202, 80%, 24%);
 
-  --ff-primary: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui,
-    helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial,
+  --ff-primary: "Inter", -apple-system, BlinkMacSystemFont, avenir next, avenir,
+    segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial,
     sans-serif;
 
   --ff-body: var(--ff-primary);
@@ -36,6 +36,11 @@
   --fs-1100: 2.75rem;
   --fs-1200: 3rem;
   --fs-1600: 4rem;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/Inter-VariableFont_slnt\,wght.ttf") format("truetype");
 }
 
 /* Box sizing rules */
@@ -104,6 +109,7 @@ svg {
 }
 
 body {
+  font-family: var(--ff-body);
   background-image: url(https://i.pinimg.com/originals/ff/4d/34/ff4d344d44981a5618deb925f0b8d381.gif);
   background-size: cover;
   background-repeat: no-repeat;
