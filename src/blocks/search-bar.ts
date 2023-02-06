@@ -35,6 +35,7 @@ function createSearchBar() {
   });
 
   searchButton.addEventListener("click", () => {
+    clearSearchError();
     clearResults();
     sendResultsToDom(searchInput.value);
   });
