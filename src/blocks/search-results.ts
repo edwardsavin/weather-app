@@ -123,7 +123,7 @@ function addResultsToContainer(
   mainWrapper.append(firstWrapper, secondWrapper);
 
   const thirdWrapper = document.createElement("div");
-  thirdWrapper.classList.add("third-wrapper");
+  thirdWrapper.classList.add("secondary-wrapper");
   thirdWrapper.append(feelsLikeResult, humidityResult, windSpeedResult);
 
   resultsContainer.append(mainWrapper, thirdWrapper);
