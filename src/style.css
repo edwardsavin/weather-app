@@ -1,14 +1,14 @@
 :root {
-  --clr-50: #f9fafb;
-  --clr-100: #f3f4f6;
-  --clr-200: #e5e7eb;
-  --clr-300: #d1d5db;
-  --clr-400: #9ca3af;
-  --clr-500: #6b7280;
-  --clr-600: #4b5563;
-  --clr-700: #374151;
-  --clr-800: #1f2937;
-  --clr-900: #111827;
+  --clr-50: hsl(210, 20%, 98%);
+  --clr-100: hsl(220, 14%, 96%);
+  --clr-200: hsl(220, 13%, 91%);
+  --clr-300: hsl(216, 12%, 84%);
+  --clr-400: hsl(218, 11%, 65%);
+  --clr-500: hsl(220, 9%, 46%);
+  --clr-600: hsl(215, 14%, 34%);
+  --clr-700: hsl(217, 19%, 27%);
+  --clr-800: hsl(215, 28%, 17%);
+  --clr-900: hsl(221, 39%, 11%);
 
   --ff-primary: "Inter", -apple-system, BlinkMacSystemFont, avenir next, avenir,
     segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial,
@@ -180,6 +180,7 @@ body {
 .unit-switcher:hover {
   color: var(--clr-200);
   background: hsla(0, 1%, 18%, 0.285);
+  border-color: hsla(210, 20%, 98%, 0.224);
 }
 
 .search-bar-container {
@@ -251,7 +252,7 @@ body {
 
 .main-wrapper {
   padding: 4vh;
-  background: rgba(16, 16, 17, 0.22);
+  background: hsla(221, 39%, 6%, 0.384);
   border-radius: 6px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
