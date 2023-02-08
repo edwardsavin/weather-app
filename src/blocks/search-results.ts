@@ -2,6 +2,7 @@ import getTemperature from "../functions/api-search";
 import { switchUnits } from "./unit-switch";
 import getFlagEmoji from "../functions/get-flag-emoji";
 import getIcon from "../functions/get-icon";
+import changeBodyBackground from "../functions/change-background";
 
 let lastValidLocation: string = "London";
 
@@ -38,6 +39,8 @@ function createIconDiv(icon: string) {
   const iconImg = document.createElement("img");
   iconImg.classList.add("weather-icon");
   iconImg.src = getIcon(icon);
+
+  changeBodyBackground(icon);
 
   iconContainer.append(iconImg);
 
